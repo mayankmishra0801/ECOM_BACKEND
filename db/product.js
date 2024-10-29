@@ -8,7 +8,9 @@ const productSchema = new mongoose.Schema({
     discount:Number,
     images:Array(String),
     categoryId: {type:Schema.Types.ObjectId,ref:'categories'},
-    brandId: {type:Schema.Types.ObjectId,ref:'brands'}
+    brandId: {type:Schema.Types.ObjectId,ref:'brands'},
+    isFeatured:Boolean,
+    isNew:Boolean
 
 
 

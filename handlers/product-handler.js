@@ -40,10 +40,29 @@ async function getProduct(id){
    return product.toObject();
 }
 
+async  function getNewProducts(){
+     let newProducts = await Product.find({
+        isNew:true
+     });
+
+     return newProducts.map((x)=> x.toObject());
+}
+
+async  function getFeaturedProduct(){
+    let featuredProducts = await Product.find({
+       isFeatured:true
+    });
+
+    return featuredProducts.map((x)=> x.toObject());
+}
+
 module.exports = {
     addProduct,
     updateProduct,
     deleteProduct,
     getAllProducts,
     getProduct,
+    getNewProducts,
+    getFeaturedProduct
+    
 }
