@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
+
 const wishListSchema = new mongoose.Schema({
    
     userId: {type:Schema.Types.ObjectId,ref:'users'},
