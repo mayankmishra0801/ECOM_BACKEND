@@ -3,7 +3,7 @@ const router = express.Router();
 const {getCategories} = require("../handlers/category-handler");
 const {getFeaturedProduct, getNewProducts, getProductForListing} = require("../handlers/product-handler");
 const { getBrands } = require("../handlers/brand-handler");
-
+const {getProduct} = require("../handlers/product-handler");
 router.get("/new-products", async  (req, res) =>{
        const products = await getNewProducts();
        res.send(products);
@@ -29,6 +29,12 @@ router.get("/products",async(req,res)=>{
     //do not use req.query
     const products = await getProductForListing(searchTerm,categoryId,pageSize,page,sortOrder,sortBy,brandId);
     res.send(products);
+})
+
+router.get("/product/:id",async(req,res)=>{
+    const id = req.params["id"];
+    const product = await getProduct(id);
+    res.send(product);
 })
 
 
