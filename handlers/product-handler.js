@@ -56,6 +56,56 @@ async  function getFeaturedProduct(){
     return featuredProducts.map((x)=> x.toObject());
 }
 
+async function getProductForListing(searchTerm,categoryId,page,pageSize,sortOrder,sortBy,brandId){
+
+    if(!sortBy){
+        sortBy = "price";
+    }
+    if(!sortOrder){
+        sortOrder = -1;
+    }
+//page is page number
+//pageSize is number of products per page
+let queryFilter = {};
+
+if(searchTerm){
+//   queryFilter.name= searchTerm
+
+queryFilter.$or = [{
+
+    name: {$regex: '.*'+searchTerm+'.*'},
+
+},
+{
+
+    shortDescription: {$regex: '.*'+searchTerm+'.*'},
+}
+
+]
+// queryFilter.name= {$regex: '.*'+searchTerm+'.*'};
+// queryFilter.shortDescription= {$regex: '.*'+searchTerm+'.*'}
+
+
+
+}  
+if(categoryId){
+  queryFilter.categoryId = categoryId
+}
+if(brandId){
+  queryFilter.brandId = brandId
+
+}
+const products = await Product.find(queryFilter).sort({
+
+//   price:-1  
+[sortBy]:+sortOrder,
+
+
+}).skip((+page-1)* +pageSize).limit(+pageSize);
+
+return products.map((x)=>x.toObject());
+}
+
 module.exports = {
     addProduct,
     updateProduct,
@@ -63,6 +113,7 @@ module.exports = {
     getAllProducts,
     getProduct,
     getNewProducts,
-    getFeaturedProduct
+    getFeaturedProduct,
+    getProductForListing
     
 }
