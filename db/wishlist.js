@@ -4,11 +4,11 @@ const { Schema } = mongoose;
 const wishListSchema = new mongoose.Schema({
    
     userId: {type:Schema.Types.ObjectId,ref:'users'},
-    productId:Array(string)
+    productId:{type:Schema.Types.ObjectId,ref:'products'},
 
 
 
 });
 
-const Wishlist = mongoose.model("categories",wishListSchema);
+const Wishlist = mongoose.model("wishlists",wishListSchema);
 module.exports = Wishlist;
