@@ -10,6 +10,7 @@ const productRoutes = require("./routes/product");
 const customerRoutes = require("./routes/customer");
 const  authRoutes = require("./routes/auth");
 const {verifyToken,isAdmin} = require("./middleware/auth-middleware");
+require('dotenv').config();
 
 app.use(cors())
 app.use(express.json());
