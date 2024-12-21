@@ -34,7 +34,7 @@ app.use("/auth",authRoutes);
  
 
 async function connectDB(){
-     await mongoose.connect("mongodb+srv://mayankmishrareal:TDqE5t1ntAQvn6CR@cluster0.od6s5.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",{
+     await mongoose.connect(process.env.MONGODB_URI,{
         dbName:"ecom-store-db"
      })
      console.log("DB CONNECTED")
