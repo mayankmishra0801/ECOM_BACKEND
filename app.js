@@ -12,7 +12,22 @@ const  authRoutes = require("./routes/auth");
 const {verifyToken,isAdmin} = require("./middleware/auth-middleware");
 require('dotenv').config();
 
-app.use(cors())
+
+const allowedOrigins = ['https://ecom-mayank.vercel.app']; // Add the allowed origins
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+// app.use(cors())
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.get("/",(req,res)=>{
