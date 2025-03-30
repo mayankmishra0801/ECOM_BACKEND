@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const {registerUser,loginUser} = require("../handlers/auth-handler");
 
-
+const {forgetPassword,resetPassword} =  require("../handlers/auth-handler");
 
 router.post("/register",async(req,res)=>{
     let model = req.body;
@@ -39,6 +39,11 @@ if(result){
         })
     }
 })
+
+
+router.post("/forgot-password",forgetPassword);
+
+router.post("/reset-password",resetPassword);
 
 
 
